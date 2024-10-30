@@ -1,0 +1,18 @@
+{
+    "sourceFile": "score_manager.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730223706094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730223706094,
+            "name": "Commit-0",
+            "content": "# score_manager.py\r\ndef save_winner_score(winner, score):\r\n    with open(\"winner_score.txt\", \"w\") as file:\r\n        file.write(f\"ผู้ชนะ: {winner}\\n\")\r\n        file.write(f\"สกอร์: {score}\\n\")\r\n\r\ndef read_winner_score():\r\n    try:\r\n        with open(\"winner_score.txt\", \"r\") as file:\r\n            return file.read()\r\n    except FileNotFoundError:\r\n        return \"ยังไม่มีข้อมูลผู้ชนะ\"\r\n"
+        }
+    ]
+}

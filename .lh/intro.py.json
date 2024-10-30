@@ -1,0 +1,134 @@
+{
+    "sourceFile": "intro.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 29,
+            "patches": [
+                {
+                    "date": 1729921303377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729921327485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,10 @@\n         TextSurf, TextRect = displayText.display_text(\"Football Game\", largeText)\r\n         TextRect.center = ((display_width / 2), (display_height / 2))\r\n         gameDisplay.blit(TextSurf, TextRect)\r\n \r\n-        \r\n+        introAction = buttons.button(gameDisplay,\"Go\",400,450,100,50,green,bright_green,'close_intro')\r\n+        buttons.button(gameDisplay,\"Cancel\",800,450,100,50,red,bright_red,'close_game')\r\n \r\n         if introAction is 'closeIntroClicked' :\r\n             #pygame.mixer.Sound.play(sound)\r\n             #pygame.mixer.music.stop()\r\n"
+                },
+                {
+                    "date": 1729921623980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,12 @@\n import buttons\r\n \r\n clock = pygame.time.Clock()\r\n \r\n-def game_intro(gameDisplay,display_width,display_height,sound) :\r\n+def game_intro(gameDisplay, display_width, display_height, sound):\r\n+    # โหลดภาพพื้นหลัง\r\n+    start_background = pygame.image.load('images/start.jpg').convert()\r\n+    start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n     white = (255,255,255)\r\n     black = (0,0,0)\r\n \r\n     red = (255,0,0)\r\n"
+                },
+                {
+                    "date": 1729921631058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดภาพพื้นหลัง\r\n     start_background = pygame.image.load('images/start.jpg').convert()\r\n+    \r\n     start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n     white = (255,255,255)\r\n     black = (0,0,0)\r\n \r\n"
+                },
+                {
+                    "date": 1729921663879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,10 @@\n                 quit()\r\n \r\n         introAction = None\r\n \r\n-        gameDisplay.fill(white)\r\n+        # แสดงภาพพื้นหลังแทนการเติมสี\r\n+        gameDisplay.blit(start_background, (0, 0))\r\n         largeText = pygame.font.Font('freesansbold.ttf', 115)\r\n         TextSurf, TextRect = displayText.display_text(\"Football Game\", largeText)\r\n         TextRect.center = ((display_width / 2), (display_height / 2))\r\n         gameDisplay.blit(TextSurf, TextRect)\r\n"
+                },
+                {
+                    "date": 1730212714324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import pygame\r\n+import cv2\r\n import displayText\r\n import buttons\r\n \r\n clock = pygame.time.Clock()\r\n"
+                },
+                {
+                    "date": 1730212734910,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,11 @@\n \r\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n-    # โหลดภาพพื้นหลัง\r\n-    start_background = pygame.image.load('images/start.jpg').convert()\r\n+    # โหลดวิดีโอด้วย OpenCV\r\n+    video_path = 'path_to_your_video.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_capture = cv2.VideoCapture(video_path)\r\n     \r\n     start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n     white = (255,255,255)\r\n     black = (0,0,0)\r\n"
+                },
+                {
+                    "date": 1730212741624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'path_to_your_video.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = ''  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n     \r\n     start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n     white = (255,255,255)\r\n"
+                },
+                {
+                    "date": 1730212748785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = ''  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = './images/intro.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n     \r\n     start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n     white = (255,255,255)\r\n"
+                },
+                {
+                    "date": 1730212756037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = './images/intro.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = './images/messi'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n     \r\n     start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n     white = (255,255,255)\r\n"
+                },
+                {
+                    "date": 1730212768838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = './images/messi'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'images/messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n     \r\n     start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n     white = (255,255,255)\r\n"
+                },
+                {
+                    "date": 1730212796058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,45 +6,62 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'images/messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'path_to_your_video.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n-    \r\n-    start_background = pygame.transform.scale(start_background, (display_width, display_height))\r\n-    white = (255,255,255)\r\n-    black = (0,0,0)\r\n \r\n-    red = (255,0,0)\r\n-    green = (0,255,0)\r\n-    blue = (0,0,255)\r\n+    white = (255, 255, 255)\r\n+    black = (0, 0, 0)\r\n+    red = (255, 0, 0)\r\n+    green = (0, 255, 0)\r\n+    blue = (0, 0, 255)\r\n+    bright_red = (255, 128, 0)\r\n+    bright_green = (0, 255, 128)\r\n \r\n-    bright_red = (255,128,0)\r\n-    bright_green = (0,255,128)\r\n-\r\n     intro = True\r\n \r\n+    def play_video_background():\r\n+        # อ่านเฟรมจากวิดีโอ\r\n+        ret, frame = video_capture.read()\r\n+        if ret:\r\n+            # แปลงสีจาก BGR (OpenCV) เป็น RGB (Pygame)\r\n+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\r\n+            # แปลงเป็น Surface ของ Pygame\r\n+            frame_surface = pygame.surfarray.make_surface(frame)\r\n+            # ปรับขนาด Surface ให้พอดีกับขนาดหน้าจอ\r\n+            frame_surface = pygame.transform.scale(frame_surface, (display_width, display_height))\r\n+            gameDisplay.blit(frame_surface, (0, 0))\r\n+        else:\r\n+            # รีเซ็ตวิดีโอให้เล่นซ้ำเมื่อถึงเฟรมสุดท้าย\r\n+            video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)\r\n+\r\n     while intro:\r\n         for event in pygame.event.get():\r\n\\ No newline at end of file\n             if event.type == pygame.QUIT:\r\n                 pygame.quit()\r\n                 quit()\r\n \r\n         introAction = None\r\n \r\n-        # แสดงภาพพื้นหลังแทนการเติมสี\r\n-        gameDisplay.blit(start_background, (0, 0))\r\n+        # แสดงวิดีโอเป็นพื้นหลัง\r\n+        play_video_background()\r\n+\r\n+        # แสดงชื่อเกม\r\n         largeText = pygame.font.Font('freesansbold.ttf', 115)\r\n         TextSurf, TextRect = displayText.display_text(\"Football Game\", largeText)\r\n         TextRect.center = ((display_width / 2), (display_height / 2))\r\n         gameDisplay.blit(TextSurf, TextRect)\r\n \r\n-        introAction = buttons.button(gameDisplay,\"Go\",400,450,100,50,green,bright_green,'close_intro')\r\n-        buttons.button(gameDisplay,\"Cancel\",800,450,100,50,red,bright_red,'close_game')\r\n+        # ปุ่ม Go และ Cancel\r\n+        introAction = buttons.button(gameDisplay, \"Go\", 400, 450, 100, 50, green, bright_green, 'close_intro')\r\n+        buttons.button(gameDisplay, \"Cancel\", 800, 450, 100, 50, red, bright_red, 'close_game')\r\n \r\n-        if introAction is 'closeIntroClicked' :\r\n-            #pygame.mixer.Sound.play(sound)\r\n-            #pygame.mixer.music.stop()\r\n+        # ตรวจสอบการกดปุ่ม\r\n+        if introAction == 'close_intro':\r\n             intro = False\r\n \r\n         pygame.display.update()\r\n-        clock.tick(15)\n+        clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n+\r\n+    # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n+    video_capture.release()\r\n"
+                },
+                {
+                    "date": 1730212805738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'path_to_your_video.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'im'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n@@ -63,5 +63,5 @@\n         pygame.display.update()\r\n         clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n \r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n-    video_capture.release()\n\\ No newline at end of file\n+    video_capture.release()\r\n"
+                },
+                {
+                    "date": 1730212816815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'im'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'images/messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n"
+                },
+                {
+                    "date": 1730212927280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'images/messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'path_to_your_video.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n@@ -25,8 +25,10 @@\n         ret, frame = video_capture.read()\r\n         if ret:\r\n             # แปลงสีจาก BGR (OpenCV) เป็น RGB (Pygame)\r\n             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\r\n+            # หมุนเฟรม 90 องศาเพื่อให้แสดงผลแนวนอน\r\n+            frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)\r\n             # แปลงเป็น Surface ของ Pygame\r\n             frame_surface = pygame.surfarray.make_surface(frame)\r\n             # ปรับขนาด Surface ให้พอดีกับขนาดหน้าจอ\r\n             frame_surface = pygame.transform.scale(frame_surface, (display_width, display_height))\r\n"
+                },
+                {
+                    "date": 1730212933634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'path_to_your_video.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'รท'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n"
+                },
+                {
+                    "date": 1730212938891,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'รท'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'images/intro.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n"
+                },
+                {
+                    "date": 1730212946175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'images/intro.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'images/messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n"
+                },
+                {
+                    "date": 1730213056811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,11 @@\n         ret, frame = video_capture.read()\r\n         if ret:\r\n             # แปลงสีจาก BGR (OpenCV) เป็น RGB (Pygame)\r\n             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\r\n-            # หมุนเฟรม 90 องศาเพื่อให้แสดงผลแนวนอน\r\n+            # หมุนเฟรม 90 องศาและ 180 องศาให้ได้วิดีโอแนวนอนและถูกต้อง\r\n             frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)\r\n+            frame = cv2.rotate(frame, cv2.ROTATE_180)  # หมุน 180 องศาเพื่อให้ไม่กลับหัว\r\n             # แปลงเป็น Surface ของ Pygame\r\n             frame_surface = pygame.surfarray.make_surface(frame)\r\n             # ปรับขนาด Surface ให้พอดีกับขนาดหน้าจอ\r\n             frame_surface = pygame.transform.scale(frame_surface, (display_width, display_height))\r\n"
+                },
+                {
+                    "date": 1730216817735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'images/messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'images/Messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n"
+                },
+                {
+                    "date": 1730229701386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'images/Messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'images/Messi2.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n@@ -58,13 +58,17 @@\n         # ปุ่ม Go และ Cancel\r\n         introAction = buttons.button(gameDisplay, \"Go\", 400, 450, 100, 50, green, bright_green, 'close_intro')\r\n         buttons.button(gameDisplay, \"Cancel\", 800, 450, 100, 50, red, bright_red, 'close_game')\r\n \r\n+\r\n         # ตรวจสอบการกดปุ่ม\r\n         if introAction == 'close_intro':\r\n             intro = False\r\n \r\n         pygame.display.update()\r\n-        clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n+        clock.tick(30)\r\n \r\n+    # เรียกฟังก์ชันหลักของเกมเมื่อออกจากลูป intro\r\n+    main_game(gameDisplay, display_width, display_height)  # เรียกหน้าจอเกมหลัก\r\n+\r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n-    video_capture.release()\r\n+    video_capture.release()\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730229717168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,8 @@\n \r\n         pygame.display.update()\r\n         clock.tick(30)\r\n \r\n-    # เรียกฟังก์ชันหลักของเกมเมื่อออกจากลูป intro\r\n-    main_game(gameDisplay, display_width, display_height)  # เรียกหน้าจอเกมหลัก\r\n+ \r\n \r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n     video_capture.release()\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730229739576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,10 @@\n             intro = False\r\n \r\n         pygame.display.update()\r\n         clock.tick(30)\r\n+        \r\n+           # เรียกฟังก์ชันหลักของเกมเมื่อออกจากลูป intro\r\n+    main_game(gameDisplay, display_width, display_height)  # เรียกหน้าจอเกมหลัก\r\n \r\n- \r\n-\r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n     video_capture.release()\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730229760937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n     # โหลดวิดีโอด้วย OpenCV\r\n-    video_path = 'images/Messi2.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n+    video_path = 'images/Messi.mp4'  # ใส่ path ของไฟล์วิดีโอที่ต้องการ\r\n     video_capture = cv2.VideoCapture(video_path)\r\n \r\n     white = (255, 255, 255)\r\n     black = (0, 0, 0)\r\n@@ -58,17 +58,13 @@\n         # ปุ่ม Go และ Cancel\r\n         introAction = buttons.button(gameDisplay, \"Go\", 400, 450, 100, 50, green, bright_green, 'close_intro')\r\n         buttons.button(gameDisplay, \"Cancel\", 800, 450, 100, 50, red, bright_red, 'close_game')\r\n \r\n-\r\n         # ตรวจสอบการกดปุ่ม\r\n         if introAction == 'close_intro':\r\n             intro = False\r\n \r\n         pygame.display.update()\r\n-        clock.tick(30)\r\n-        \r\n-           # เรียกฟังก์ชันหลักของเกมเมื่อออกจากลูป intro\r\n-    main_game(gameDisplay, display_width, display_height)  # เรียกหน้าจอเกมหลัก\r\n+        clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n \r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n\\ No newline at end of file\n-    video_capture.release()\n+    video_capture.release()\r\n"
+                },
+                {
+                    "date": 1730229795764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,10 +61,12 @@\n \r\n         # ตรวจสอบการกดปุ่ม\r\n         if introAction == 'close_intro':\r\n             intro = False\r\n+            \r\n+            \r\n \r\n         pygame.display.update()\r\n         clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n \r\n\\ No newline at end of file\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n-    video_capture.release()\n+    video_capture.release()\r\n"
+                },
+                {
+                    "date": 1730229812450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,11 +62,9 @@\n         # ตรวจสอบการกดปุ่ม\r\n         if introAction == 'close_intro':\r\n             intro = False\r\n             \r\n-            \r\n-\r\n         pygame.display.update()\r\n         clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n \r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n-    video_capture.release()\n\\ No newline at end of file\n+    video_capture.release()\r\n"
+                },
+                {
+                    "date": 1730229820018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,11 @@\n \r\n         # ตรวจสอบการกดปุ่ม\r\n         if introAction == 'close_intro':\r\n             intro = False\r\n-            \r\n+        \r\n+            # เรียกฟังก์ชันหลักของเกมเมื่อออกจากลูป intro\r\n+        main_game(gameDisplay, display_width, display_height)\r\n         pygame.display.update()\r\n         clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n \r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n"
+                },
+                {
+                    "date": 1730229895808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import pygame\r\n import cv2\r\n import displayText\r\n import buttons\r\n+from game import main_game\r\n \r\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n"
+                },
+                {
+                    "date": 1730229937477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import pygame\r\n import cv2\r\n import displayText\r\n import buttons\r\n-from game import main_game\r\n \r\n clock = pygame.time.Clock()\r\n \r\n def game_intro(gameDisplay, display_width, display_height, sound):\r\n"
+                },
+                {
+                    "date": 1730229943972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,10 +62,8 @@\n         # ตรวจสอบการกดปุ่ม\r\n         if introAction == 'close_intro':\r\n             intro = False\r\n         \r\n-            # เรียกฟังก์ชันหลักของเกมเมื่อออกจากลูป intro\r\n-        main_game(gameDisplay, display_width, display_height)\r\n         pygame.display.update()\r\n         clock.tick(30)  # ตั้งอัตราเฟรมสำหรับการแสดงวิดีโอ\r\n \r\n     # ปิดการจับภาพเมื่อสิ้นสุดการใช้งาน\r\n"
+                }
+            ],
+            "date": 1729921303377,
+            "name": "Commit-0",
+            "content": "import pygame\r\nimport displayText\r\nimport buttons\r\n\r\nclock = pygame.time.Clock()\r\n\r\ndef game_intro(gameDisplay,display_width,display_height,sound) :\r\n    white = (255,255,255)\r\n    black = (0,0,0)\r\n\r\n    red = (255,0,0)\r\n    green = (0,255,0)\r\n    blue = (0,0,255)\r\n\r\n    bright_red = (255,128,0)\r\n    bright_green = (0,255,128)\r\n\r\n    intro = True\r\n\r\n    while intro:\r\n        for event in pygame.event.get():\r\n            if event.type == pygame.QUIT:\r\n                pygame.quit()\r\n                quit()\r\n\r\n        introAction = None\r\n\r\n        gameDisplay.fill(white)\r\n        largeText = pygame.font.Font('freesansbold.ttf', 115)\r\n        TextSurf, TextRect = displayText.display_text(\"Football Game\", largeText)\r\n        TextRect.center = ((display_width / 2), (display_height / 2))\r\n        gameDisplay.blit(TextSurf, TextRect)\r\n\r\n        \r\n\r\n        if introAction is 'closeIntroClicked' :\r\n            #pygame.mixer.Sound.play(sound)\r\n            #pygame.mixer.music.stop()\r\n            intro = False\r\n\r\n        pygame.display.update()\r\n        clock.tick(15)"
+        }
+    ]
+}

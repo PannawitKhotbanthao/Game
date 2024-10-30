@@ -1,0 +1,26 @@
+{
+    "sourceFile": "video_loader.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1730215169747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730215653955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n # video_loader.py\r\n \r\n+# video_loader.py\r\n+\r\n import cv2\r\n import pygame\r\n \r\n def load_and_resize_video(video_path, display_width, display_height):\r\n@@ -10,8 +12,10 @@\n     def get_next_frame():\r\n         # อ่านเฟรมจากวิดีโอ\r\n         ret, frame = video_capture.read()\r\n         if ret:\r\n+            # หมุนเฟรม 90 องศาเป็นแนวตั้ง\r\n+            frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)\r\n             # ปรับขนาดเฟรมให้ตรงกับขนาดหน้าจอ\r\n             frame = cv2.resize(frame, (display_width, display_height))\r\n             # แปลงสีจาก BGR (OpenCV) เป็น RGB (Pygame)\r\n             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\r\n@@ -23,4 +27,5 @@\n             video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)\r\n             return None\r\n \r\n     return get_next_frame, video_capture\r\n+\r\n"
+                },
+                {
+                    "date": 1730215660079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,4 @@\n-# video_loader.py\r\n-\r\n-# video_loader.py\r\n-\r\n import cv2\r\n import pygame\r\n \r\n def load_and_resize_video(video_path, display_width, display_height):\r\n"
+                }
+            ],
+            "date": 1730215169747,
+            "name": "Commit-0",
+            "content": "# video_loader.py\r\n\r\nimport cv2\r\nimport pygame\r\n\r\ndef load_and_resize_video(video_path, display_width, display_height):\r\n    # โหลดวิดีโอด้วย OpenCV\r\n    video_capture = cv2.VideoCapture(video_path)\r\n\r\n    def get_next_frame():\r\n        # อ่านเฟรมจากวิดีโอ\r\n        ret, frame = video_capture.read()\r\n        if ret:\r\n            # ปรับขนาดเฟรมให้ตรงกับขนาดหน้าจอ\r\n            frame = cv2.resize(frame, (display_width, display_height))\r\n            # แปลงสีจาก BGR (OpenCV) เป็น RGB (Pygame)\r\n            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\r\n            # แปลงเป็น Surface ของ Pygame\r\n            backImg = pygame.surfarray.make_surface(frame)\r\n            return backImg\r\n        else:\r\n            # รีเซ็ตวิดีโอให้เล่นซ้ำเมื่อถึงเฟรมสุดท้าย\r\n            video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)\r\n            return None\r\n\r\n    return get_next_frame, video_capture\r\n"
+        }
+    ]
+}
